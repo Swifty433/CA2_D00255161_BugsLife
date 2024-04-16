@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\Users\josep\CLionProjects\CA3_D00255161_BugsLife Select CMakeLists.txt
