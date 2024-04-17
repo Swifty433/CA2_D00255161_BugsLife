@@ -4,4 +4,6 @@ project(CA3_D00255161_BugsLife)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CA3_D00255161_BugsLife main.cpp
-        bug.cpp)
+        bugs.cpp
+        board.cpp
+        board.h)
