@@ -4,6 +4,12 @@ project(CA3_D00255161_BugsLife)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CA3_D00255161_BugsLife main.cpp
-        bugs.cpp
         board.cpp
-        board.h)
+        board.h
+        bug.cpp
+        bug.h
+        hopper.cpp
+        hopper.h
+        crawler.cpp
+        crawler.h
+        direction.h)

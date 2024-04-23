@@ -55,14 +55,26 @@ build CMakeFiles/CA3_D00255161_BugsLife.dir/main.cpp.obj: CXX_COMPILER__CA3_D002
   OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
   OBJECT_FILE_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
 
-build CMakeFiles/CA3_D00255161_BugsLife.dir/bugs.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/bugs.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
-  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\bugs.cpp.obj.d
+build CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/board.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
+  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\board.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
   OBJECT_FILE_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
 
-build CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/board.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
-  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\board.cpp.obj.d
+build CMakeFiles/CA3_D00255161_BugsLife.dir/bug.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/bug.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
+  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\bug.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
+  OBJECT_FILE_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
+
+build CMakeFiles/CA3_D00255161_BugsLife.dir/hopper.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/hopper.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
+  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\hopper.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
+  OBJECT_FILE_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
+
+build CMakeFiles/CA3_D00255161_BugsLife.dir/crawler.cpp.obj: CXX_COMPILER__CA3_D00255161_BugsLife_unscanned_Debug C$:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/crawler.cpp || cmake_object_order_depends_target_CA3_D00255161_BugsLife
+  DEP_FILE = CMakeFiles\CA3_D00255161_BugsLife.dir\crawler.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
   OBJECT_FILE_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir
@@ -75,7 +87,7 @@ build CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj: CXX_COMPILER__CA3_D00
 #############################################
 # Link the executable CA3_D00255161_BugsLife.exe
 
-build CA3_D00255161_BugsLife.exe: CXX_EXECUTABLE_LINKER__CA3_D00255161_BugsLife_Debug CMakeFiles/CA3_D00255161_BugsLife.dir/main.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/bugs.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj
+build CA3_D00255161_BugsLife.exe: CXX_EXECUTABLE_LINKER__CA3_D00255161_BugsLife_Debug CMakeFiles/CA3_D00255161_BugsLife.dir/main.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/bug.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/hopper.cpp.obj CMakeFiles/CA3_D00255161_BugsLife.dir/crawler.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\CA3_D00255161_BugsLife.dir

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "bugs.cpp"
+#include "bug.cpp"
 
 using namespace std;
 
