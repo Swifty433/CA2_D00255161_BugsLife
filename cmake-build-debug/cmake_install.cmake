@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/josep/CLionProjects/CA3_D00255161_BugsLife
+# Install script for directory: C:/Users/josep/CLionProjects/CA2_D00255161_BugsLife
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

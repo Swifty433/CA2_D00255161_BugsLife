@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src/cmake-build-debug",
-		"source" : "C:/Users/josep/CLionProjects/CA3_D00255161_BugsLife/src"
+		"build" : "C:/Users/josep/CLionProjects/CA2_D00255161_BugsLife/src/cmake-build-debug",
+		"source" : "C:/Users/josep/CLionProjects/CA2_D00255161_BugsLife/src"
 	},
 	"version" : 
 	{
