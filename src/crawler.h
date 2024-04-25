@@ -5,8 +5,16 @@
 #ifndef CA3_D00255161_BUGSLIFE_CRAWLER_H
 #define CA3_D00255161_BUGSLIFE_CRAWLER_H
 
+#include "bug.h"
 
-class crawler {
+
+class crawler : public  bug {
+
+public:
+    using bug::bug;
+
+    void move();
+    void update();
 
 };
 

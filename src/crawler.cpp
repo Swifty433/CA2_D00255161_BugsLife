@@ -3,3 +3,13 @@
 //
 
 #include "crawler.h"
+#include "direction.h"
+
+void crawler::update() {
+
+}
+
+
+void crawler::move() {
+
+}

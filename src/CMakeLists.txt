@@ -12,4 +12,5 @@ add_executable(CA3_D00255161_BugsLife main.cpp
         hopper.h
         crawler.cpp
         crawler.h
-        direction.h)
+        direction.h
+)

@@ -5,9 +5,16 @@
 #ifndef CA3_D00255161_BUGSLIFE_HOPPER_H
 #define CA3_D00255161_BUGSLIFE_HOPPER_H
 
+#include "bug.h"
 
-class hopper {
 
+class hopper : public bug {
+
+public:
+    using bug::bug;
+
+    void move();
+    void update();
 };
 
 

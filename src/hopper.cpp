@@ -3,3 +3,16 @@
 //
 
 #include "hopper.h"
+#include "direction.h"
+
+void hopper::update() {
+
+}
+
+void hopper::move() {
+    if(dir = "NORTH")
+    {
+
+    }
+
+}
