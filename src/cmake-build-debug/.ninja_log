@@ -1,0 +1,6 @@
+# ninja log v5
+8	614	7357860105257034	build.ninja	ab2919d1ca0910b5
+37	384	7357860110306961	CMakeFiles/CA3_D00255161_BugsLife.dir/board.cpp.obj	742af628c8ea65e7
+14	420	7357860110669695	CMakeFiles/CA3_D00255161_BugsLife.dir/crawler.cpp.obj	d5d0881ac5843a80
+51	455	7357860111015206	CMakeFiles/CA3_D00255161_BugsLife.dir/bug.cpp.obj	ae3b9b4d630b8ed0
+1	619	7357860112661197	CMakeFiles/CA3_D00255161_BugsLife.dir/main.cpp.obj	94a696eb2b08cad6
