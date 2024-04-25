@@ -6,10 +6,10 @@
 #define CA3_D00255161_BUGSLIFE_DIRECTION_H
 
 enum class direction{
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST
+    North = 1,
+    East = 2,
+    South = 3,
+    West = 4
 };
 
 

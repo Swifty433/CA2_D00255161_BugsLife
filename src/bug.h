@@ -9,40 +9,53 @@
 #include <list>
 #include "direction.h"
 
+using namespace std;
+
 class bug {
 protected:
-    unsigned int id;                        //id of bug
-    std::pair<int, int> position;           //postition of bug (x,y)
-    direction dir;                          //direction bug is facing
-    unsigned int size;                      //size of bug
+    int id;                        //id of bug
+    pair<int, int> position;                //position of bug (x,y)
+    direction dir;                                //direction bug is facing
+    int size;                      //size of bug
     bool alive;                             //bug alive or deal bool
-    std::list<std::pair<int, int>> path;    //List to store path of bug
-    int boardWidth;                         //width of the board
-    int boardHeight;                        //height of the board
+    list<pair<int, int>> path;              //List to store path of bug
+
 
 public:
+
+    virtual void move() = 0;
+
+    virtual ~bug();
+
     //constructor
-    bug(int id, int x, int y, int size, int width, int height, direction dir = direction::NORTH);
+    bug(int id, int x, int y, int dir, int size);
     //default constructor
     bug();
 
-    //getters
     int getId() const;
-    int getX() const;
-    int getY() const;
-    std::pair<int, int> getPos() const;
-    std::list<std::pair<int, int>> getPath() const;
-    int getSize() const;
+
+    int setId(int id);
+
+    const pair<int, int> &getPosition() const;
+
+    void setPosition(const pair<int, int> &position);
+
     direction getDir() const;
 
-    //setters
-    void setX(const int x);
-    void setY(const int y);
-    void setDir(direction d);
+    void setDir(direction dir);
 
-    //Methods
-    void grow(unsigned int by);
+    int getSize() const;
+
+    void setSize(int size);
+
     bool isAlive() const;
+
+    void setAlive(bool alive);
+
+    const list<pair<int, int>> &getPath() const;
+
+    void setPath(const list<pair<int, int>> &path);
+
 };
 
 #endif //CA3_D00255161_BUGSLIFE_BUG_H

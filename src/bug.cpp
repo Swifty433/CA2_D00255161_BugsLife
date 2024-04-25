@@ -1,59 +1,55 @@
 #include "bug.h"
 
-// Constructor
-bug::bug(int id, int x, int y, int size, int width, int height, direction dir)
-        : id(id), position(x, y), dir(dir), size(size % 20), alive(true), boardWidth(width), boardHeight(height) {}
+using namespace std;
 
-// Default constructor
-bug::bug() : id(0), position(0, 0), dir(direction::NORTH), size(0), alive(false), boardWidth(0), boardHeight(0) {}
+bug::~bug(){
 
-// Getters
+}
+
+bug::bug(int id, int x, int y, int dir, int size):
+    id(id), position(x,y), size(size), alive(true), path()
+{
+    this->dir = static_cast<direction>(dir);
+}
+
 int bug::getId() const {
     return id;
 }
 
-int bug::getX() const {
-    return position.first;
+int bug::setId(int id) {
+    bug::id = id;
 }
 
-int bug::getY() const {
-    return position.second;
-}
-
-std::pair<int, int> bug::getPos() const {
+const std::pair<int, int>& bug::getPosition() const {
     return position;
 }
 
-std::list<std::pair<int, int>> bug::getPath() const {
-    return path;
-}
-
-int bug::getSize() const {
-    return size;
+void bug::setPosition(const std::pair<int, int>& position) {
+    bug::position = position;
 }
 
 direction bug::getDir() const {
     return dir;
 }
 
-// Setters
-void bug::setX(const int x) {
-    position.first = x;
+void bug::setDir(direction dir) {
+    bug::dir = dir;
 }
 
-void bug::setY(const int y) {
-    position.second = y;
+int bug::getSize() const {
+    return size;
 }
 
-void bug::setDir(direction d) {
-    dir = d;
-}
-
-// Methods
-void bug::grow(unsigned int by) {
-    size += by;
+void bug::setSize(int size) {
+    bug::size = size;
 }
 
 bool bug::isAlive() const {
     return alive;
 }
+
+void bug::setAlive(bool alive) {
+    bug::alive = alive;
+}
+
+bug::bug(){}
