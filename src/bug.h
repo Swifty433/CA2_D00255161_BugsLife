@@ -13,10 +13,10 @@ using namespace std;
 
 class bug {
 protected:
-    int id;                        //id of bug
+    int id;                                 //id of bug
     pair<int, int> position;                //position of bug (x,y)
-    direction dir;                                //direction bug is facing
-    int size;                      //size of bug
+    direction dir;                          //direction bug is facing
+    int size;                               //size of bug
     bool alive;                             //bug alive or deal bool
     list<pair<int, int>> path;              //List to store path of bug
 
