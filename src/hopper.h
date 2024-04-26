@@ -13,7 +13,7 @@ private:
     int hopLength;
 
 public:
-    hopper(int id, int x, int y, int dir, int size);
+    hopper(char type, int id, int x, int y, int dir, int size);
 
     void move() override;
     // ~hopper();

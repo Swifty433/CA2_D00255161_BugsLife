@@ -13,7 +13,7 @@ using namespace std;
 
 class bug {
 protected:
-    char type;
+    char type;                              //type of bug
     int id;                                 //id of bug
     pair<int, int> position;                //position of bug (x,y)
     direction dir;                          //direction bug is facing
@@ -29,13 +29,17 @@ public:
     virtual ~bug();
 
     //constructor
-    bug(int id, int x, int y, int dir, int size);
+    bug(char type, int id, int x, int y, int dir, int size);
     //default constructor
     bug();
 
+    char getType() const;
+
+    void setType(char type);
+
     int getId() const;
 
-    int setId(int id);
+    void setId(int id);
 
     const pair<int, int> &getPosition() const;
 
@@ -56,7 +60,6 @@ public:
     const list<pair<int, int>> &getPath() const;
 
     void setPath(const list<pair<int, int>> &path);
-
 };
 
 #endif //CA3_D00255161_BUGSLIFE_BUG_H

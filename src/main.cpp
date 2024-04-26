@@ -2,7 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include "bug.cpp"
+#include "bug.h"
 #include "board.h"
 #include "crawler.h"
 #include "hopper.h"
@@ -22,7 +22,7 @@ int main() {
         vector<bug*> vect;
         board bugBoard;
 
-        ifstream file("Bugs.txt");
+        ifstream file("bugs.txt");
 
         if(!file.is_open()){
             cout << "Cant Open File" << endl;
@@ -39,7 +39,7 @@ int main() {
             }
 
             try{
-                //char type = tokens[0][0];
+                char type = tokens[0][0];
                 int id = stoi(tokens[1]);
                 int x = stoi(tokens[2]);
                 int y = stoi(tokens[3]);
@@ -52,7 +52,7 @@ int main() {
                 }
                 else if (type == 'H'){
                     int hopLength = stoi(tokens[6]);
-                    bug = new hopper(type, id, x, y, dir, size)
+                    bug = new hopper(type, id, x, y, dir, size);
                 }
                 else{
                     cout << "Error reading types" << endl;

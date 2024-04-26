@@ -22,7 +22,7 @@ void board::addBugToBoard(const bug &bug) {
     && position.second >= 0 && position.second < grid[0].size())
     {
        char  bugType = bug.getType();
-       grid[position.first][position.second] = bug.getType;
+       grid[position.first][position.second] = bug.getType();
     }
     else{
         cerr << "Bug Position is out of bounds!" << endl;

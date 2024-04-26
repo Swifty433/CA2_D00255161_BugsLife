@@ -66,3 +66,5 @@ __pycache__/
 
 # Ignore build folders
 x64/
+/src/cmake-build-debug/CMakeFiles/Progress
+/src/cmake-build-debug/CMakeFiles/CA3_D00255161_BugsLife.dir

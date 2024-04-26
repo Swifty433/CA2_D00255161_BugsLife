@@ -8,7 +8,7 @@
 
 using namespace std;
 
-crawler::crawler(int id, int x, int y, int dir, int size) : bug(id, x, y, dir, size) {}
+crawler::crawler(char type, int id, int x, int y, int dir, int size) : bug(type, id, x, y, dir, size) {}
 
 void crawler::move() {
 

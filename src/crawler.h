@@ -13,7 +13,7 @@ class crawler : public  bug {
 private:
 
 public:
-    crawler(int id, int x, int y, int dir, int size);
+    crawler(char type, int id, int x, int y, int dir, int size);
 
     void move() override;
     //~crawler();
