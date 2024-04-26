@@ -23,6 +23,8 @@ public:
 
     void addBugToBoard(const bug& bug);
     void displayBoard();
+
+    bug *findBugByID(const vector<bug*> & vect);
 };
 
 

@@ -16,9 +16,60 @@ enum class Direction{
     West = 4
 };
 
-int main() {
-    while(true)
+string dirString(Direction dir) {
+    switch (dir) {
+        case Direction::North:
+            return "North";
+        case Direction::East:
+            return "East";
+        case Direction::South:
+            return "South";
+        case Direction::West:
+            return "West";
+        default:
+            return "Unknown";
+    }
+}
+
+// Function to display Bug information
+void display(const bug& bug) {
+    // Print bug information
+    cout << "Type: " << bug.getType() << endl;
+    cout << "ID: " << bug.getId() << endl;
+    cout << "Position: " << bug.getPosition().first << "," << bug.getPosition().second << endl;
+    cout << "Direction: " << dirString(static_cast<Direction>(static_cast<int>(bug.getDir()))) << endl;
+    cout << "Size: " << bug.getSize() << endl;
+    cout << "Alive: " << (bug.isAlive() ? "true" : "false") << endl;
+}
+
+bug* board::findBugByID(const vector<bug*> & vect) {
+    int findID;
+    bool ifBugFound = false;
+
+    cout << "Input an ID of bug to find" << endl;
+    cin >> findID;
+    for (const bug* bug : vect)
     {
+        if(bug->getId() == findID)
+        {
+            cout << "Bug Found" << endl;
+            display(*bug);
+
+            ifBugFound = true;
+            break;
+        }
+        else
+        {
+            cout << "No Bug Found!" << endl;
+        }
+    }
+}
+
+
+
+
+int main() {
+
         vector<bug*> vect;
         board bugBoard;
 
@@ -72,7 +123,9 @@ int main() {
         //User display Menu
 
         int userCommand;
-
+        bool runProgramme = true;
+    while(runProgramme)
+    {
         cout << "*******Menu********" << endl;
         cout << "Choose a command you want!" << endl;
         cout << "1. Initialize Bug Board" << endl;
@@ -95,8 +148,14 @@ int main() {
                 bugBoard.displayBoard();
                 break;
             case 2:
+
+                for (bug* bug : vect) {
+                    display(*bug);
+                    cout << "\n" << endl;
+                }
                 break;
             case 3:
+                bugBoard.findBugByID(vect);
                 break;
             case 4:
                 break;
@@ -107,12 +166,13 @@ int main() {
             case 7:
                 break;
             case 8:
-                return 0;
+                runProgramme = false;
+                break;
             default:
                 cerr << "Invalid Option" << endl;
                 break;
         }
-        return 0;
     }
+    return 0;
 }
 
