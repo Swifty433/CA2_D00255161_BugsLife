@@ -91,6 +91,8 @@ int main() {
 
         switch (userCommand) {
             case 1:
+                cout << "Bug Board Initialized!\n" << endl;
+                bugBoard.displayBoard();
                 break;
             case 2:
                 break;

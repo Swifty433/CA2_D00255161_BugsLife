@@ -11,20 +11,33 @@ board::board() {
     grid.assign(10, vector<char>(10, '-'));
 }
 
-const vector<vector<char>>*board::getGrid() const {
+const vector<vector<char>>& board::getGrid() const {
     return grid;
 }
 
-void board::addBugToBoard(const bug &bug) {
+void board::addBugToBoard(const bug& bug)
+{
     pair<int, int> position = bug.getPosition();
-
-    if(position.first >= 0 && position.first < grid.size()
-    && position.second >= 0 && position.second < grid[0].size())
+    if (position.first >= 0 && position.first < grid.size() && position.second >= 0 && position.second < grid[0].size())
     {
-       char  bugType = bug.getType();
-       grid[position.first][position.second] = bug.getType();
+        char bugType = bug.getType();
+        grid[position.first][position.second] = bug.getType();
     }
-    else{
-        cerr << "Bug Position is out of bounds!" << endl;
+    else
+    {
+        cerr << "Bug position is out of bounds!" << endl;
+    }
+}
+
+void board::displayBoard()
+{
+
+    for(int k = 0; k < 10; ++k)
+    {
+        for(int j = 0; j < 10; ++j)
+        {
+            cout << grid[k][j] << "  ";
+        }
+        cout << endl;
     }
 }
