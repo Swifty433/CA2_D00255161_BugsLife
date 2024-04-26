@@ -7,14 +7,16 @@
 
 #include "bug.h"
 
-
 class hopper : public bug {
 
-public:
-    using bug::bug;
+private:
+    int hopLength;
 
-    void move();
-    void update();
+public:
+    hopper(int id, int x, int y, int dir, int size);
+
+    void move() override;
+    // ~hopper();
 };
 
 

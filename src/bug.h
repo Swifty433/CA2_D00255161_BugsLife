@@ -13,6 +13,7 @@ using namespace std;
 
 class bug {
 protected:
+    char type;
     int id;                                 //id of bug
     pair<int, int> position;                //position of bug (x,y)
     direction dir;                          //direction bug is facing

@@ -10,12 +10,13 @@
 
 class crawler : public  bug {
 
+private:
+
 public:
-    using bug::bug;
+    crawler(int id, int x, int y, int dir, int size);
 
-    void move();
-    void update();
-
+    void move() override;
+    //~crawler();
 };
 
 
