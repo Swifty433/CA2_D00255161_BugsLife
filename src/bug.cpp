@@ -60,12 +60,27 @@ void bug::setAlive(bool alive) {
     bug::alive = alive;
 }
 
-const list<pair<int, int>> &bug::getPath() const {
+list<pair<int, int>> &bug::getPath(){
     return path;
 }
 
 void bug::setPath(const list<pair<int, int>> &path) {
     bug::path = path;
+}
+
+bool bug::isWayBlocked() {
+    switch (dir) {
+        case direction::North:
+            return (position.second == 0);
+        case direction::East:
+            return (position.first == 9);
+        case direction::South:
+            return (position.second == 9);
+        case direction::West:
+            return (position.first == 0);
+        default:
+            return true;
+    }
 }
 
 bug::bug(){}

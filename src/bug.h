@@ -20,6 +20,7 @@ protected:
     int size;                               //size of bug
     bool alive;                             //bug alive or deal bool
     list<pair<int, int>> path;              //List to store path of bug
+    bool isWayBlocked();                    //checking if path is blocked(Method)
 
 
 public:
@@ -57,7 +58,7 @@ public:
 
     void setAlive(bool alive);
 
-    const list<pair<int, int>> &getPath() const;
+    list<pair<int, int>> &getPath();
 
     void setPath(const list<pair<int, int>> &path);
 };

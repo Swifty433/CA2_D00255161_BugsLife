@@ -6,6 +6,7 @@
 #include "board.h"
 #include "crawler.h"
 #include "hopper.h"
+#include "jewelBug.h"
 
 using namespace std;
 
@@ -31,15 +32,18 @@ string dirString(Direction dir) {
     }
 }
 
+void headings(){
+    //Headings
+    printf("%-5s %-6s %s %12s %10s %7s\n",
+           "Type", "ID", "Position", "Direction", "Size", "Alive");
+}
+
 // Function to display Bug information
 void display(const bug& bug) {
     // Print bug information
-    cout << "Type: " << bug.getType() << endl;
-    cout << "ID: " << bug.getId() << endl;
-    cout << "Position: " << bug.getPosition().first << "," << bug.getPosition().second << endl;
-    cout << "Direction: " << dirString(static_cast<Direction>(static_cast<int>(bug.getDir()))) << endl;
-    cout << "Size: " << bug.getSize() << endl;
-    cout << "Alive: " << (bug.isAlive() ? "true" : "false") << endl;
+    printf("%-5c %-6d (%-2d,%-2d)     %-15s %-7d %-7s\n",
+           bug.getType(), bug.getId(), bug.getPosition().first, bug.getPosition().second,
+           dirString(static_cast<Direction>(static_cast<int>(bug.getDir()))).c_str(), bug.getSize(), bug.isAlive() ? "true" : "false");
 }
 
 bug* board::findBugByID(const vector<bug*> & vect) {
@@ -53,6 +57,7 @@ bug* board::findBugByID(const vector<bug*> & vect) {
         if(bug->getId() == findID)
         {
             cout << "Bug Found" << endl;
+            headings();
             display(*bug);
 
             ifBugFound = true;
@@ -65,10 +70,18 @@ bug* board::findBugByID(const vector<bug*> & vect) {
     }
 }
 
-
-
-
 int main() {
+
+    std::cout << R"(
+______                   _     _  __       _____   ___   _____
+| ___ \                 | |   (_)/ _|     /  __ \ / _ \ / __  \
+| |_/ /_   _  __ _ ___  | |    _| |_ ___  | /  \// /_\ \`' / /'
+| ___ \ | | |/ _` / __| | |   | |  _/ _ \ | |    |  _  |  / /
+| |_/ / |_| | (_| \__ \ | |___| | ||  __/ | \__/\| | | |./ /___
+\____/ \__,_|\__, |___/ \_____/_|_| \___|  \____/\_| |_/\_____/
+              __/ |
+             |___/
+)" << '\n';
 
         vector<bug*> vect;
         board bugBoard;
@@ -103,7 +116,11 @@ int main() {
                 }
                 else if (type == 'H'){
                     int hopLength = stoi(tokens[6]);
-                    bug = new hopper(type, id, x, y, dir, size);
+                    bug = new hopper(type, id, x, y, dir, size, hopLength);
+                }
+                else if(type == 'J'){
+                    int hopLength = stoi(tokens[6]);
+                    bug = new jewelBug(type, id, x, y, dir, size, hopLength);
                 }
                 else{
                     cout << "Error reading types" << endl;
@@ -148,11 +165,11 @@ int main() {
                 bugBoard.displayBoard();
                 break;
             case 2:
-
+                headings();
                 for (bug* bug : vect) {
                     display(*bug);
-                    cout << "\n" << endl;
                 }
+                cout << "\n" << endl;
                 break;
             case 3:
                 bugBoard.findBugByID(vect);

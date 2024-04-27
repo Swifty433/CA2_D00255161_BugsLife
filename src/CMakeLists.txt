@@ -13,4 +13,6 @@ add_executable(CA3_D00255161_BugsLife main.cpp
         crawler.cpp
         crawler.h
         direction.h
+        jewelBug.cpp
+        jewelBug.h
 )
