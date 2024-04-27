@@ -70,6 +70,35 @@ bug* board::findBugByID(const vector<bug*> & vect) {
     }
 }
 
+void showLifeHistory(const vector<bug*> & vect){
+
+    for (const auto& bug : vect){
+
+        cout << bug->getId() << endl;
+
+        if(bug->isAlive()){
+
+            const auto& path = bug->getPath();
+
+            auto iterate = path.begin();
+
+            if(iterate != path.end()){
+                ++iterate;
+            }
+
+            for(; iterate != path.end(); ++iterate){
+                cout << " -> (" << iterate->first << "," << iterate->second << ")";
+            }
+        }
+        else{
+
+        }
+    }
+}
+
+
+
+
 int main() {
 
     std::cout << R"(
@@ -182,6 +211,7 @@ ______                   _     _  __       _____   ___   _____
                 }
                 break;
             case 5:
+                showLifeHistory(vect);
                 break;
             case 6:
                 break;
