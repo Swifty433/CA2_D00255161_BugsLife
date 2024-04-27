@@ -63,10 +63,10 @@ bug* board::findBugByID(const vector<bug*> & vect) {
             ifBugFound = true;
             break;
         }
-        else
-        {
-            cout << "No Bug Found!" << endl;
-        }
+    }
+    if(!findID)
+    {
+        cout << "No Bug Found!" << endl;
     }
 }
 
@@ -175,6 +175,11 @@ ______                   _     _  __       _____   ___   _____
                 bugBoard.findBugByID(vect);
                 break;
             case 4:
+                for(bug* bug : vect){
+                    if(bug->isAlive()){
+                        bug->move();
+                    }
+                }
                 break;
             case 5:
                 break;
