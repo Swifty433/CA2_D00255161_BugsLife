@@ -314,7 +314,8 @@ ______                   _     _  __       _____   ___   _____
         cout << "5. Display Life History of All Bugs" << endl;
         cout << "6. Display All Cells Listing Their Bugs" << endl;
         cout << "7. Run Simulation" << endl;
-        cout << "8. Exit" << endl;
+        cout << "8. RUN SFML POP UP WINDOW!" << endl;
+        cout << "9. Exit" << endl;
         cin >> userCommand; // Get user's choice
 
         for(const auto& bug: vect){
@@ -372,12 +373,12 @@ ______                   _     _  __       _____   ___   _____
                 writeBugHistoryToFile(vect, "bugs_life_history_date_time.out");
                 break;
             case 8:
-                writeBugHistoryToFile(vect,"bugs_life_history_date_time.out");
-                runProgramme = false;
-                break;
-            case 9:
                 cout<<"Opening SFML Window! Enjoy!" << endl;
                 sfmlWindow(bugBoard, vect);
+                break;
+            case 9:
+                writeBugHistoryToFile(vect,"bugs_life_history_date_time.out");
+                runProgramme = false;
                 break;
             default:
                 cerr << "Invalid Option" << endl;
