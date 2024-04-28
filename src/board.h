@@ -30,10 +30,15 @@ public:
 
     void showAllCells(const vector<bug*>& bugs) const;
 
-    void fightPhase(vector<bug*>& bugs);
+    void fightPhase(vector<bug*>& vect);
 
-    void runSFML(board& board);
-    void draw(sf::RenderWindow& window);
+    void sfmlWindow(board& board,vector<bug*>& vect);
+
+    void draw(sf::RenderWindow &window, const vector<bug*>& vect, const sf::Texture& hopperTexture, const sf::Texture& crawlerTexture, const sf::Texture& jewelTexture);
+
+    bool gameOver(vector<bug *> &vect);
+
+    void tap(vector<bug *> &vect);
 };
 
 

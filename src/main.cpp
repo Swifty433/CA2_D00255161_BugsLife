@@ -8,9 +8,11 @@
 #include "hopper.h"
 #include "jewelBug.h"
 #include <SFML/Graphics.hpp>
+#include <thread>
 
 using namespace std;
 
+//enum class
 enum class Direction{
     North = 1,
     East = 2,
@@ -18,6 +20,7 @@ enum class Direction{
     West = 4
 };
 
+//Direction to string method
 string dirString(Direction dir) {
     switch (dir) {
         case Direction::North:
@@ -33,10 +36,13 @@ string dirString(Direction dir) {
     }
 }
 
+//Headings method
 void headings(){
     //Headings
+    printf("********************************************************\n");
     printf("%-5s %-6s %s %12s %10s %7s\n",
            "Type", "ID", "Position", "Direction", "Size", "Alive");
+    printf("********************************************************\n");
 }
 
 // Function to display Bug information
@@ -47,58 +53,72 @@ void display(const bug& bug) {
            dirString(static_cast<Direction>(static_cast<int>(bug.getDir()))).c_str(), bug.getSize(), bug.isAlive() ? "true" : "false");
 }
 
+//method to find a bug by specific ID
 bug* board::findBugByID(const vector<bug*> & vect) {
     int findID;
-    bool ifBugFound = false;
 
+    //prompt user for an id
     cout << "Input an ID of bug to find" << endl;
     cin >> findID;
+    //loops throught he vector of bugs to find the bug with ID
     for (const bug* bug : vect)
     {
+        //checks if they match
         if(bug->getId() == findID)
         {
+            //if found prints a message and displays details
             cout << "Bug Found" << endl;
             headings();
             display(*bug);
-
-            ifBugFound = true;
             break;
         }
     }
+    // If bug is not found, print a message
     if(!findID)
     {
         cout << "No Bug Found!" << endl;
     }
+    return nullptr;
 }
 
-void showLifeHistory(const vector<bug*> & vect) {
-    {
-        for (const auto &bug: vect) {
-            cout << "Bug ID: " << bug->getId() << " - Path: ";
+//Shows the path that the bug travelled over its life.
+void showLifeHistory(const vector<bug*> & vect){
 
-            if (bug->isAlive()) {
-                const auto &path = bug->getPath();
-                if (!path.empty()) {
-                    auto it = path.begin();
-                    cout << "(" << it->first << "," << it->second << ")";
-                    ++it;
-                    for (; it != path.end(); ++it) {
-                        cout << " -> (" << it->first << "," << it->second << ")";
-                    }
-                } else {
-                    cout << "No moves made yet.";
+    //iterate through bug vector
+    for (const auto &bug: vect) {
+        //then print bugs id and start of path
+        cout << "Bug ID: " << bug->getId() << " - Path: ";
+        //checking if bug is alive
+        if (bug->isAlive()) {
+            //gets bugs path
+            const auto &path = bug->getPath();
+            //check if the bug has made any moves
+            if (!path.empty()) {
+                auto it = path.begin();
+                cout << "(" << it->first << "," << it->second << ")";
+                ++it;
+                //prints intial position
+                for (; it != path.end(); ++it) {
+                    cout << " -> (" << it->first << "," << it->second << ")";
                 }
             } else {
-                cout << "Bug is Dead";
+                //and if no moves are made yet print mesage
+                cout << "No moves made yet.";
             }
-
-            cout << endl;
+        } else {
+            //bug dead message
+            cout << "Bug is Dead";
         }
+        cout << endl;
     }
 }
 
+//method to write the path bugs took to a file called "bugs_life_history_date_time.out"
 void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
+    //setting up file name
     ofstream outputFile(filename);
+
+    //if file fails to open
     if (!outputFile.is_open()) {
         cout << "Failed to open file: " << filename << endl;
         return;
@@ -108,11 +128,14 @@ void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
     for (const auto& bug : vect) {
         outputFile << "Bug ID: " << bug->getId() << " Path: ";
 
+        //getting the path of the bug
         const auto& path = bug->getPath();
+        //boolean for if the bug hasnt moved yet
         bool isStart = true;
 
-        // Write the moves made by the bug
+        // writing the moves made by the bug
         for (const auto& point : path) {
+            //if the bug haas moved then it will show the location with a forward arrow to its next position
             if (!isStart) {
                 outputFile << " -> ";
             }
@@ -120,7 +143,7 @@ void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
             isStart = false;
         }
 
-        // Indicate if the bug is dead
+        // shows if the bug is dead in the file and when it died
         if (!bug->isAlive()) {
             outputFile << " - Bug is Dead";
         }
@@ -128,30 +151,70 @@ void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
         outputFile << endl;
     }
 
+    //closes the file
     outputFile.close();
 }
 
-void sfmlWindow(board& board){
+//Method to set up the sfml window to play the game in a pop out window
+void sfmlWindow(board& board,vector<bug*>& vect){
 
-
-    sf::RenderWindow window(sf::VideoMode(720, 480), "CA2: BugsLife Project C++");
-
+    //rendering a window that is 480x480
+    sf::RenderWindow window(sf::VideoMode(480, 480), "CA2 BugsLife Project");
+    // Load images for bugs
+    sf::Texture hopperTexture;
+    if (!hopperTexture.loadFromFile("Hopper.png")) {
+        cout << "No image found" << endl;
+    }
+    sf::Texture crawlerTexture;
+    if (!crawlerTexture.loadFromFile("Crawler.png")) {
+        cout << "No image found" << endl;
+    }
+    sf::Texture jewelTexture;
+    if (!jewelTexture.loadFromFile("Jewel.png")) {
+        cout << "No image found" << endl;
+    }
     while (window.isOpen())
     {
-
         sf::Event event;
         while (window.pollEvent(event))
         {
+            //ability to close popup window
             if (event.type == sf::Event::Closed)
                 window.close();
-        }
-        window.clear();
 
-        board.draw(window);
+            //setting up the button press events
+            if (event.type == sf::Event::KeyPressed || event.type == sf::Event::MouseButtonPressed)
+            {
+                //checking if button is pressed
+                if (event.key.code == sf::Keyboard::LShift || event.key.code == sf::Mouse::Left)
+                {
+                    if(!board.gameOver(vect))
+                    {
+                        // Move all bugs
+                        board.tap(vect);
+                        board.fightPhase(vect);
+                    }
+                    else if (board.gameOver(vect))
+                    {
+                        //when all bugs dead game over and closes window
+                        window.close();
+                        cout << "Game over! Play Again?" << endl;
+                        //then write to a file with statistics
+                        writeBugHistoryToFile(vect, "bugs_life_history_date_time.out");
+                    }
+                }
+            }
+        }
+        //clearing the window
+        window.clear();
+        //drawing the window
+        board.draw(window, vect,hopperTexture,crawlerTexture,jewelTexture);
+        //displaying window
         window.display();
     }
 }
 
+//Main Menu for app containing reading from a file as well as the cases.
 int main() {
 
     std::cout << R"(
@@ -165,26 +228,37 @@ ______                   _     _  __       _____   ___   _____
              |___/
 )" << '\n';
 
+        //vector of bugs
         vector<bug*> vect;
         board bugBoard;
 
         ifstream file("bugs.txt");
 
+        //checking if the file can be opened
         if(!file.is_open()){
+            //if it cant be opened print message
             cout << "Cant Open File" << endl;
             return 1;
         }
 
+        //string to store each line read from file
         string line;
+        //reading each file
         while(getline(file, line)){
+            //string stram to parse the line into tokens
             stringstream ss(line);
+            //vecter to store the tokens from each line
             vector<string> tokens;
+            //strimg to store each token
             string token;
+
+            //extract token form stringstream
             while(getline(ss, token, ';')){
                 tokens.push_back(token);
             }
 
             try{
+                // get bug properties
                 char type = tokens[0][0];
                 int id = stoi(tokens[1]);
                 int x = stoi(tokens[2]);
@@ -192,7 +266,9 @@ ______                   _     _  __       _____   ___   _____
                 int dir = stoi(tokens[4]);
                 int size = stoi(tokens[5]);
 
+                //pointer to a bug object
                 bug* bug = nullptr;
+                //check the type of bug and create an objedct for it
                 if(type == 'C'){
                     bug = new crawler(type, id, x, y, dir, size);
                 }
@@ -208,8 +284,11 @@ ______                   _     _  __       _____   ___   _____
                     cout << "Error reading types" << endl;
                 }
 
+                //if bug object is created succesfully
                 if(bug){
+                    //add the bug object to the vector of bugs
                     vect.push_back(bug);
+                    //add the bug to the board
                     bugBoard.addBugToBoard(*bug); // create this method
                 }
             }
@@ -217,10 +296,10 @@ ______                   _     _  __       _____   ___   _____
                 cerr << "invalid input: " << e.what() << endl;
             }
         }
+        //close file after reading from it
         file.close();
 
-        //User display Menu
-
+        //display Menu
         int userCommand;
         bool runProgramme = true;
         bool bugBoardInitialized = false;
@@ -242,11 +321,13 @@ ______                   _     _  __       _____   ___   _____
             bugBoard.addBugToBoard(*bug); //create method
         }
 
+        //ensure board is initialized before any other commands are ran
         if (!bugBoardInitialized && userCommand != 1) {
             cout << "Must initialize the bug board first!" << endl;
             continue;
         }
 
+        //switch cases for commands
         switch (userCommand) {
             case 1:
                 cout << "Bug Board Initialized!\n" << endl;
@@ -278,13 +359,25 @@ ______                   _     _  __       _____   ___   _____
                 bugBoard.showAllCells(vect);
                 break;
             case 7:
+                //link to resource used for case 7: https://stackoverflow.com/questions/50136540/calling-a-function-every-1-second-precisely
+                while (!bugBoard.gameOver(vect)) {
+                    // Move all bugs
+                    bugBoard.tap(vect);
+                    bugBoard.fightPhase(vect);
+
+                    // Sleep for 1 second before the next iteration
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
+                }
+                // Game over: Write bug history to file
+                writeBugHistoryToFile(vect, "bugs_life_history_date_time.out");
                 break;
             case 8:
                 writeBugHistoryToFile(vect,"bugs_life_history_date_time.out");
                 runProgramme = false;
                 break;
             case 9:
-                sfmlWindow(bugBoard);
+                cout<<"Opening SFML Window! Enjoy!" << endl;
+                sfmlWindow(bugBoard, vect);
                 break;
             default:
                 cerr << "Invalid Option" << endl;
