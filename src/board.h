@@ -7,12 +7,14 @@
 
 #include "bug.h"
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
 class board {
 protected:
     vector<vector<char>> grid;
+    vector<sf::RectangleShape> boardSquares;
 
 public:
     //Constructor
@@ -29,6 +31,9 @@ public:
     void showAllCells(const vector<bug*>& bugs) const;
 
     void fightPhase(vector<bug*>& bugs);
+
+    void runSFML(board& board);
+    void draw(sf::RenderWindow& window);
 };
 
 

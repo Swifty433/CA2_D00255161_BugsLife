@@ -7,6 +7,7 @@
 #include "crawler.h"
 #include "hopper.h"
 #include "jewelBug.h"
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -130,8 +131,26 @@ void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
     outputFile.close();
 }
 
+void sfmlWindow(board& board){
 
 
+    sf::RenderWindow window(sf::VideoMode(720, 480), "CA2: BugsLife Project C++");
+
+    while (window.isOpen())
+    {
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear();
+
+        board.draw(window);
+        window.display();
+    }
+}
 
 int main() {
 
@@ -250,6 +269,7 @@ ______                   _     _  __       _____   ___   _____
                         bug->move();
                     }
                 }
+                bugBoard.fightPhase(vect);
                 break;
             case 5:
                 showLifeHistory(vect);
@@ -262,6 +282,9 @@ ______                   _     _  __       _____   ___   _____
             case 8:
                 writeBugHistoryToFile(vect,"bugs_life_history_date_time.out");
                 runProgramme = false;
+                break;
+            case 9:
+                sfmlWindow(bugBoard);
                 break;
             default:
                 cerr << "Invalid Option" << endl;
