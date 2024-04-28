@@ -5,7 +5,7 @@
 #include "jewelBug.h"
 using namespace std;
 
-jewelBug::jewelBug(char type, int id, int x, int y, int dir, int size, int hoplength) :
+jewelBug::jewelBug(char type, int id, int x, int y, int dir, int size, int hopLength) :
         bug(type, id, x, y, dir, size) {
     this-> hopLength = hopLength;
     path.push_back(position);
@@ -39,4 +39,5 @@ void jewelBug::move() {
     setPosition(bugPos);
 
     getPath().push_back(bugPos);
+    cout << "new pos = " << getPosition().first << "," << getPosition().second << "\n"<< endl;
 }

@@ -70,30 +70,64 @@ bug* board::findBugByID(const vector<bug*> & vect) {
     }
 }
 
-void showLifeHistory(const vector<bug*> & vect){
+void showLifeHistory(const vector<bug*> & vect) {
+    {
+        for (const auto &bug: vect) {
+            cout << "Bug ID: " << bug->getId() << " - Path: ";
 
-    for (const auto& bug : vect){
-
-        cout << bug->getId() << endl;
-
-        if(bug->isAlive()){
-
-            const auto& path = bug->getPath();
-
-            auto iterate = path.begin();
-
-            if(iterate != path.end()){
-                ++iterate;
+            if (bug->isAlive()) {
+                const auto &path = bug->getPath();
+                if (!path.empty()) {
+                    auto it = path.begin();
+                    cout << "(" << it->first << "," << it->second << ")";
+                    ++it;
+                    for (; it != path.end(); ++it) {
+                        cout << " -> (" << it->first << "," << it->second << ")";
+                    }
+                } else {
+                    cout << "No moves made yet.";
+                }
+            } else {
+                cout << "Bug is Dead";
             }
 
-            for(; iterate != path.end(); ++iterate){
-                cout << " -> (" << iterate->first << "," << iterate->second << ")";
-            }
-        }
-        else{
-
+            cout << endl;
         }
     }
+}
+
+void writeBugHistoryToFile(const vector<bug*> vect, const string& filename){
+    ofstream outputFile(filename);
+    if (!outputFile.is_open()) {
+        cout << "Failed to open file: " << filename << endl;
+        return;
+    }
+
+    // Write bug history to the file
+    for (const auto& bug : vect) {
+        outputFile << "Bug ID: " << bug->getId() << " Path: ";
+
+        const auto& path = bug->getPath();
+        bool isStart = true;
+
+        // Write the moves made by the bug
+        for (const auto& point : path) {
+            if (!isStart) {
+                outputFile << " -> ";
+            }
+            outputFile << "(" << point.first << "," << point.second << ")";
+            isStart = false;
+        }
+
+        // Indicate if the bug is dead
+        if (!bug->isAlive()) {
+            outputFile << " - Bug is Dead";
+        }
+
+        outputFile << endl;
+    }
+
+    outputFile.close();
 }
 
 
@@ -170,6 +204,7 @@ ______                   _     _  __       _____   ___   _____
 
         int userCommand;
         bool runProgramme = true;
+        bool bugBoardInitialized = false;
     while(runProgramme)
     {
         cout << "*******Menu********" << endl;
@@ -188,10 +223,16 @@ ______                   _     _  __       _____   ___   _____
             bugBoard.addBugToBoard(*bug); //create method
         }
 
+        if (!bugBoardInitialized && userCommand != 1) {
+            cout << "Must initialize the bug board first!" << endl;
+            continue;
+        }
+
         switch (userCommand) {
             case 1:
                 cout << "Bug Board Initialized!\n" << endl;
                 bugBoard.displayBoard();
+                bugBoardInitialized = true;
                 break;
             case 2:
                 headings();
@@ -214,10 +255,12 @@ ______                   _     _  __       _____   ___   _____
                 showLifeHistory(vect);
                 break;
             case 6:
+                bugBoard.showAllCells(vect);
                 break;
             case 7:
                 break;
             case 8:
+                writeBugHistoryToFile(vect,"bugs_life_history_date_time.out");
                 runProgramme = false;
                 break;
             default:

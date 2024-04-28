@@ -11,6 +11,7 @@ using namespace std;
 crawler::crawler(char type, int id, int x, int y, int dir, int size) : bug(type, id, x, y, dir, size) {}
 
 void crawler::move() {
+    cout << "Old Position: (" << getPosition().first << ", " << getPosition().second << ")" << endl;
     pair<int, int>bugPos = getPosition();
 
     while(isWayBlocked())
@@ -35,5 +36,6 @@ void crawler::move() {
     setPosition(bugPos);
 
     getPath().push_back(bugPos);
+    cout << "new pos = " << getPosition().first << "," << getPosition().second << "\n"<< endl;
 }
 

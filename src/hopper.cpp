@@ -8,7 +8,7 @@
 
 using namespace std;
 
-hopper::hopper(char type, int id, int x, int y, int dir, int size, int hoplength) :
+hopper::hopper(char type, int id, int x, int y, int dir, int size, int hopLength) :
 bug(type, id, x, y, dir, size) {
     this-> hopLength = hopLength;
     path.push_back(position);
@@ -27,20 +27,25 @@ void hopper::move() {
     switch (dir) {
         case direction::North:
             bugPos.second-= hopLength;
+            if(bugPos.second < 0) bugPos.second = 0;
             break;
         case direction::East:
             bugPos.first+= hopLength;
+            if(bugPos.first > 9) bugPos.first = 9;
             break;
         case direction::South:
             bugPos.second+= hopLength;
+            if(bugPos.second > 9) bugPos.second = 9;
             break;
         case direction::West:
             bugPos.first-= hopLength;
+            if(bugPos.first < 0) bugPos.first = 0;
             break;
     }
     setPosition(bugPos);
 
     getPath().push_back(bugPos);
+    cout << "new pos = " << getPosition().first << "," << getPosition().second << "\n"<< endl;
 }
 
 

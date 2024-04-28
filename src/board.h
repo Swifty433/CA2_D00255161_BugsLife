@@ -25,6 +25,10 @@ public:
     void displayBoard();
 
     bug *findBugByID(const vector<bug*> & vect);
+
+    void showAllCells(const vector<bug*>& bugs) const;
+
+    void fightPhase(vector<bug*>& bugs);
 };
 
 

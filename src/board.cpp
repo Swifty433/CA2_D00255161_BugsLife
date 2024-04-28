@@ -41,3 +41,29 @@ void board::displayBoard()
         cout << endl;
     }
 }
+
+void board::showAllCells(const vector<bug *> &bugs) const {
+    const auto& grid = getGrid();
+
+    int i = 0;
+    for(const auto& row : grid){
+        for(int j = 0; j < row.size(); j++){
+
+
+            bool bugFound = false;
+            for(const bug* bug : bugs){
+                if(bug->getPosition() == make_pair(i,j)){
+                    cout << "Bug Type: " << bug->getType() << ", ID: " << bug->getId() << " ";
+                    bugFound = true;
+                    break;
+                }
+            }
+            if(!bugFound){
+                cout << "No bug found";
+            }
+            cout << endl;
+        }
+        i++;
+    }
+}
+
